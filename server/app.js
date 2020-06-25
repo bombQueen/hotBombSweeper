@@ -1,10 +1,12 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 
 app.use(express.json())
+app.use(cors())
+
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
-
 
 // const rooms = [
 //   room = {
