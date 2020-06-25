@@ -46,6 +46,7 @@ io.on('connection', (socket) => {
 
   socket.on("joinRoom", function(room) {
     socket.join(room.name)
+    rooms[room.id - 1] = room
     io.to((room.name)).emit("click", room.id)
   })
 });

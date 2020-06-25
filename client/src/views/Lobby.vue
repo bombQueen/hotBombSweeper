@@ -32,7 +32,9 @@ export default {
   },
   methods: {
     joinRoom(room) {
-      if(room.players.length < 4) {
+      if(room.players[0].name == localStorage.isLoggedIn) {
+        this.$router.push(`room/${room.id}`).catch(() => {})
+      } else if(room.players.length < 4) {
         console.log('Bisa JOIN', room)
         localStorage.setItem("roomId", room.id)
         localStorage.setItem("roomName", room.name)

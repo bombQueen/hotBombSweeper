@@ -28,13 +28,13 @@ export default {
       return localStorage.roomName
     },
     bombs() {
-      if (this.$store.state.rooms[localStorage.roomId - 1].bombs) {
-        return this.$store.state.rooms[localStorage.roomId - 1].bombs
+      if (this.$store.state.rooms[this.$route.params.id - 1].bombs) {
+        return this.$store.state.rooms[this.$route.params.id - 1].bombs
       }
     },
     players() {
-      if (this.$store.state.rooms[localStorage.roomId - 1].players) {
-        return this.$store.state.rooms[localStorage.roomId - 1].players
+      if (this.$store.state.rooms[this.$route.params.id - 1].players) {
+        return this.$store.state.rooms[this.$route.params.id - 1].players
       }
     },
     roomId(){
