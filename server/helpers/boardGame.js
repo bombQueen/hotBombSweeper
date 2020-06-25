@@ -13,4 +13,4 @@ function randomBomb(num) {
     return bombs
 }
 
-console.log(randomBomb());
+module.exports = randomBomb
