@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import io from 'socket.io-client';
-const socket = io('http://localhost:3000');
+const socket = io('https://hotbomb.herokuapp.com');
 
 Vue.use(Vuex)
 
@@ -45,9 +45,9 @@ export default new Vuex.Store({
       socket.emit("new-room", room);
     },
     joinRoom({ commit }, room) {
-      const roomid = localStorage.roomid
-      socket.emit("join-room", String(roomid))
-      socket.emit("chats", String(roomid))
+      const roomId = localStorage.roomId
+      socket.emit("join-room", String(roomId))
+      socket.emit("chats", String(roomId))
     },
     newChat({ commit }, message) {
        const payload = {
@@ -56,7 +56,7 @@ export default new Vuex.Store({
           by: localStorage.getItem("isloggedin") || "anonymous"
         },
         room: {
-          id: localStorage.getItem("roomid"),
+          id: localStorage.getItem("roomId"),
         }
       }
       socket.emit("new-chat", payload)

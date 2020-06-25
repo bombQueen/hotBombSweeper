@@ -104,4 +104,6 @@ io.on('connection', (socket) => {
 
 });
 
-http.listen(3000, _=> console.log('Server jalan'))
+const port = process.env.PORT || 3000
+
+http.listen(port, _=> console.log('Server jalan'))
