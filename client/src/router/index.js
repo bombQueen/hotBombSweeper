@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Room from '../views/Room.vue'
 import Chat from '../views/Chat.vue'
+import Board from '../views/Board.vue'
 Vue.use(VueRouter)
 
   const routes = [
@@ -26,6 +27,11 @@ Vue.use(VueRouter)
     meta: { requiresAuth: true },
     component: Chat 
   },
+  {
+    path: '/board',
+    name: 'Board',
+    component: Board 
+  },
 ]
 
 const router = new VueRouter({
@@ -35,25 +41,25 @@ const router = new VueRouter({
 })
 
 
-router.beforeEach((to, from, next) => {
-  const isLoggedIn = localStorage.isloggedin
-  if (to.matched.some(record => record.meta.requiresAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!isLoggedIn) {
-      next({
-        path: '/'
-      })
-    } else {
-      next()
-    }
-  } else {
-    if (isLoggedIn) {
-      next("/room") // make sure to always call next()!
-    }else{
-      next() // make sure to always call next()!
-    }
-  }
-})
+// router.beforeEach((to, from, next) => {
+//   const isLoggedIn = localStorage.isloggedin
+//   if (to.matched.some(record => record.meta.requiresAuth)) {
+//     // this route requires auth, check if logged in
+//     // if not, redirect to login page.
+//     if (!isLoggedIn) {
+//       next({
+//         path: '/'
+//       })
+//     } else {
+//       next()
+//     }
+//   } else {
+//     if (isLoggedIn) {
+//       next("/room") // make sure to always call next()!
+//     }else{
+//       next() // make sure to always call next()!
+//     }
+//   }
+// })
 
 export default router
