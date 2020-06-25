@@ -1,0 +1,18 @@
+rooms: [
+  room: {
+    max 4, min 2
+    players: [
+      {name: red, isPlaying: bool, isWinner: bool},
+      {name: blue, isPlaying: bool, isWinner: bool},
+    ]
+  }
+]
+
+App.vue -> input name -> select room
+Kasih waktu per turn (e.g. 10 secs)
+Function random di server -> client created -> get('/random/:roomId')
+
+team leader (interim) -> Yohan
+layout html -> Sony
+socket master x 2 -> Chairul, Raka
+game master -> Ichsan
