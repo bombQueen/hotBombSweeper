@@ -1,0 +1,12 @@
+/* body {
+    background-image: url(../assets/cool-background.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+} */
+
+
+body {
+    background-color: #ff9900;
+    height: 800px;
+  }
