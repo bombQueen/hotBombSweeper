@@ -4,7 +4,7 @@
     <button class="btn btn-sm btn-info mb-3" @click="addRoom">add room</button>
     <small class="form-text text-muted">refresh dulu klow room g keliatan</small>
     <div class="row">
-      <div v-for="room in rooms" class="col-3 card m-2">
+      <div v-for="(room, i) in rooms" :key="i" class="col-3 card m-2">
         <div class="card-body">
           <h5 class="card-title">{{room.name}}</h5>
           <button 
@@ -29,21 +29,22 @@ export default {
  },
  methods: {
   joinRoom(room) {
-    console.log(room)
+    console.log('INI ROOM UTK DI JOIN', room)
     localStorage.setItem("roomid", room.id)
     localStorage.setItem("roomname", room.name)
-    this.$router.push("/chat")
+    this.$store.dispatch('joinRoom', room)
+    // this.$router.push("/chat")
   },
   addRoom() {
-      let room = prompt("Please enter name room:", " ");
-      if(!!room) {
-        this.$store.dispatch("newRoom", room)
-      }
-    },
-    refresh() {
-      this.$store.dispatch("refreshRoom")
+    let room = prompt("Please enter name room:", " ");
+    if(!!room) {
+      this.$store.dispatch("newRoom", room)
     }
   },
+  refresh() {
+    this.$store.dispatch("refreshRoom")
+  }
+},
 
   mounted() {
     console.log("kepanggil")
