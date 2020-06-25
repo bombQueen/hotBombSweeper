@@ -20,10 +20,15 @@ const io = require('socket.io')(http)
 
 const rooms = [
   {
-    id: "1",
+    id: 1,
     name: "contoh room",
-    members: ["127.0.0.1"],
-    chats: []
+    players: [
+      { name: 'Admin Hardcode', isPlaying: true, isWinner: false, isMaster: true }
+    ],
+    bombs: [
+      [1, 2], [3, 4], [4, 3], [2, 1], [1, 1], [2, 2], [3, 3], [4, 4], [5, 5], [6, 6]
+    ],
+    isFull: false
   }
 ]
 
@@ -50,20 +55,26 @@ io.on('connection', (socket) => {
 
   io.emit("rooms", rooms)
   io.on("rooms", function  () {
-    console.log("emitroom ")
+    console.log("emitroom")
     io.emit("rooms", rooms)
   })
   // listen from client to create new room
-  socket.on("new-room", function (name) {
+  socket.on("new-room", function (room) {
+    // const lastRoom = rooms.length + 1
+    //localStorage.isLoggedin di push ke members
+    // const room = {
+    //   id: lastRoom,
+    //   name: name,
+    //   players: [
+    //     {name: blue, isPlaying: true, isWinner: false, isMaster: true },
+    //     {name: red, isPlaying: true, isWinner: false, isMaster: false },
+    //   ]
+    // }
+    // if (room.members[0] == host)
 
-    const lastRoom = rooms.length + 1
-    const room = {
-      id: lastRoom,
-      name: name,
-      members: [],
-      chats: []
-    }
     rooms.push(room)
+    console.log('HASIL >>>', rooms)
+
     // io emit to client for refresh rooms
     io.emit("rooms", rooms)
   })
