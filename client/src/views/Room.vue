@@ -1,55 +1,50 @@
 <template>
-  <div class="mt-4">
-    <h1>List room</h1>
-    <button class="btn btn-sm btn-info mb-3" @click="addRoom">add room</button>
-    <small class="form-text text-muted">refresh dulu klow room g keliatan</small>
-    <div class="row">
-      <div v-for="(room, i) in rooms" :key="i" class="col-3 card m-2">
-        <div class="card-body">
-          <h5 class="card-title">{{room.name}}</h5>
-          <button 
-            class="btn btn-primary btn-sm btn-block mt-2"
-            @click="joinRoom(room)"
-          >
-            Join
-          </button>
-        </div>
-      </div>
+  <div class="mt-5 row">
+    <div class="col-6 card">
+    <div class="card-body">
+      <h1 class="card-title">Play || {{roomName}}</h1>
+      <h5 class="card-body">Bombs || {{bombs}}</h5>
+       <p class="lead text-muted ml-1">Click the mine when it's your turn</p>
+       <ul>
+         <li v-for="(player, i) in players" :key="i">{{ player }}</li>
+       </ul>
+      <hr>
+    </div>
     </div>
   </div>
 </template>
-
 <script>
+import { mapState } from 'vuex'
+
 export default {
- name: "Room",
- computed: {
-  rooms() {
-    return this.$store.state.rooms
-  }
- },
- methods: {
-  joinRoom(room) {
-    console.log('INI ROOM UTK DI JOIN', room)
-    localStorage.setItem("roomid", room.id)
-    localStorage.setItem("roomname", room.name)
-    this.$store.dispatch('joinRoom', room)
-    // this.$router.push("/chat")
-  },
-  addRoom() {
-    let room = prompt("Please enter name room:", " ");
-    if(!!room) {
-      this.$store.dispatch("newRoom", room)
+  name: "BombLand",
+  data() {
+    return {
+      message: "",
     }
   },
-  refresh() {
-    this.$store.dispatch("refreshRoom")
-  }
-},
-
+  computed: {
+    roomName() {
+      return localStorage.roomName
+    },
+    bombs() {
+      if (this.$store.state.rooms[localStorage.roomId - 1].bombs) {
+        return this.$store.state.rooms[localStorage.roomId - 1].bombs
+      }
+    },
+    players() {
+      if (this.$store.state.rooms[localStorage.roomId - 1].players) {
+        return this.$store.state.rooms[localStorage.roomId - 1].players
+      }
+    },
+    roomId(){
+      return this.$route.params.id
+    }
+  },
+  methods :{
+  },
   mounted() {
-    console.log("kepanggil")
-    this.$store.dispatch("refreshRoom")
-    this.$store.dispatch("listenRoom")
+    // this.$store.dispatch("joinRoom")
   }
 };
 </script>
