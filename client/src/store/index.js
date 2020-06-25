@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 import io from 'socket.io-client';
 const socket = io('https://hotbomb.herokuapp.com');
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
