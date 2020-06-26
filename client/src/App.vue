@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="container">
+  <div id="app" class="container align-center">
     <div class="d-flex justify-content-end my-3">
       <b-button variant="danger" @click="logout">Logout</b-button>
     </div>

@@ -1,23 +1,24 @@
 <template>
   <div class="mt-5 row">
-    <div class="col-6 card">
+    <div class="col align-self-center">
       <div class="card-body">
-        <h1 class="card-title">Play || {{roomName}}</h1>
-        <p class="lead text-muted ml-1">Click the mine when it's your turn</p>
+        <h1 class="card-title">Roomname : {{roomName}}</h1>
+        <!-- <p class="lead text-muted ml-1">Click the mine when it's your turn</p> -->
+        <p>Player : </p>
         <ul>
-          <li v-for="(player, i) in players" :key="i">{{ player }}</li>
+          <li v-for="(player, i) in players" :key="i">{{ player.name }} <a v-if="player.isMaster == true"><strong>Room Master</strong></a></li>
         </ul>
         <div v-if="modalShow">
-          <b-modal v-model="modalShow" hide-header hide-footer>
+          <b-modal v-model="modalShow" hide-header hide-footer class="d-flex justify-content-center">
             <lottie-player
               src="https://assets6.lottiefiles.com/private_files/lf30_vKCBXa.json"
               background="transparent"
               speed="1"
-              style="width: 300px; height: 300px;"
+              style="width: 300px; height: 300px;margin:0 auto;"
               loop
-              controls
               autoplay
-            ></lottie-player>
+            ></lottie-player><br>
+            <p class="text-center">Congratulation, You Win !!!</p>
           </b-modal>
         </div>
         <hr />

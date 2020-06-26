@@ -2,7 +2,7 @@
   <div>  
         <br><h1 class="text-center">BombSweeper</h1><br><br>
         <MainGrid v-for="(data, idx) in row" :key="idx" :data="data" :idx="idx">
-        </MainGrid>
+        </MainGrid><br><br><br><br>
   </div>
 </template>
 
