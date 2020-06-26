@@ -2,10 +2,12 @@
   <div class="mt-5 row">
     <div class="col-6 card">
       <div class="card-body">
-        <h1 class="card-title">Play || {{roomName}}</h1>
+        <h1 class="card-title display-3">{{roomName}}</h1>
         <p class="lead text-muted ml-1">Click the mine when it's your turn</p>
         <ul>
-          <li v-for="(player, i) in players" :key="i">{{ player }}</li>
+          <div v-for="(player, i) in players" :key="i">
+            Player {{i+1}}: {{player.name}}
+          </div>
         </ul>
         <div v-if="modalShow">
           <b-modal v-model="modalShow" hide-header hide-footer>
@@ -18,6 +20,9 @@
               controls
               autoplay
             ></lottie-player>
+            <div class="text-center display-4">
+              The Champion is {{ currentPlayer }} ^^  
+            </div>
           </b-modal>
         </div>
         <hr />
@@ -54,6 +59,9 @@ export default {
     }
   },
   computed: {
+    currentPlayer() {
+      return localStorage.isLoggedIn
+    },
     roomName() {
       return localStorage.roomName;
     },
