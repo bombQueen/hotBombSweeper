@@ -10,6 +10,7 @@ Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 
 Vue.config.productionTip = false
+// Vue.use(vuetify);
 
 new Vue({
   router,

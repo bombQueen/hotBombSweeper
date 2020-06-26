@@ -27,6 +27,11 @@ Vue.use(VueRouter)
     meta: { requiresAuth: true },
     component: Room 
   },
+  {
+    path: '/board',
+    name: 'Board',
+    component: Board 
+  },
 ]
 
 const router = new VueRouter({
