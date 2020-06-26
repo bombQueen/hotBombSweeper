@@ -17,7 +17,7 @@
 
 <script>
 import io from 'socket.io-client';
-const socket = io('http://localhost:3000'); // https://hotbomb.herokuapp.com
+const socket = io('https://hotbomb.herokuapp.com'); // https://hotbomb.herokuapp.comhttp://localhost:3000
 
 export default {
   props: [ 'data', 'idx' ],
