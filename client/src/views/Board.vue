@@ -34,4 +34,8 @@ body {
     background-position: center;
     background-attachment: fixed;
 }
+#indeks {
+  height: 2rem;
+  width: 2rem;
+}
 </style>
