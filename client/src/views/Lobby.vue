@@ -16,6 +16,12 @@
         </div>
       </div>
     </div>
+    <button 
+            class="btn btn-success mt-2"
+            @click="toBoard()"
+          >
+            Board
+    </button>
   </div>
 </template>
 
@@ -49,6 +55,10 @@ export default {
       if(!!room) {
         this.$store.dispatch("newRoom", room)
       }
+    },
+    toBoard() {
+      console.log('Mau lihat board')
+      this.$router.push(`board`).catch(() => {})
     },
   },
   mounted() {

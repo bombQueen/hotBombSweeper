@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Lobby from '../views/Lobby.vue'
 import Room from '../views/Room.vue'
+import Board from '../views/Board.vue'
 
 Vue.use(VueRouter)
 
@@ -30,6 +31,7 @@ Vue.use(VueRouter)
   {
     path: '/board',
     name: 'Board',
+    meta: { requiresAuth: true },
     component: Board 
   },
 ]
