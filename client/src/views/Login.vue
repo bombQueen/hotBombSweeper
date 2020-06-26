@@ -26,9 +26,10 @@ export default {
   },
   methods: {
     login() {
-      localStorage.setItem("isloggedin", this.username)
+      localStorage.setItem("isLoggedIn", this.username)
       this.$store.commit("SET_ISLOGGEDIN", this.username);
-      this.$router.push("room");
+      this.$router.push("room").catch(() => {})
+      ;
     }
   }
 }
