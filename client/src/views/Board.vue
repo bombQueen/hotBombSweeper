@@ -16,10 +16,8 @@ export default {
   },
 
   data(){
-    //
     return {
       row: 10
-      // jumlahKebawah: []
     }
   },
   created() {

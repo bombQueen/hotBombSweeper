@@ -29,9 +29,11 @@
 <script>
 import { mapState } from "vuex";
 import Board from "./Board.vue";
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000'); // https://hotbomb.herokuapp.comhttp://localhost:3000
 
 export default {
-  name: "BombLand",
+  name: "Room",
   components: {
     Board
   },
@@ -43,13 +45,14 @@ export default {
     };
   },
   watch: {
-    lastName: function(val) {
-      this.fullName = this.firstName + " " + val;
-    },
     score(val) {
       let temp = this
-      if (val >= 5) {
+      if (val >= 10) {
         temp.modalShow = true
+        temp.$store.commit('RESET_SCORE')
+        temp.$store.dispatch('deleteRoom', localStorage.roomName)
+        temp.$router.push(`lobby`).catch(() => {})
+        socket.emit('winner')
       }
     }
   },
@@ -66,8 +69,9 @@ export default {
       return this.$store.state.score
     },
     players() {
-      if (this.$store.state.rooms[this.$route.params.id - 1].players) {
-        return this.$store.state.rooms[this.$route.params.id - 1].players;
+      let players = this.$store.state.rooms[this.$route.params.id - 1].players
+      if (players) {
+        return players;
       }
     },
     roomId() {
@@ -82,13 +86,13 @@ export default {
       this.$refs["my-modal"].hide();
     },
     toggleModal() {
-      // We pass the ID of the button that we want to return focus to
-      // when the modal has hidden
       this.$refs["my-modal"].toggle("#toggle-btn");
     }
   },
   mounted() {
-    // this.$store.dispatch("joinRoom")
+    socket.emit('winner', ()=> {
+      this.$router.push(`lobby`).catch(() => {})
+    })
   }
 };
 </script>

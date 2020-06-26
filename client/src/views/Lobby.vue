@@ -16,12 +16,12 @@
         </div>
       </div>
     </div>
-    <button 
+    <!-- <button 
             class="btn btn-success mt-2"
             @click="toBoard()"
           >
             Board
-    </button>
+    </button> -->
   </div>
 </template>
 
@@ -57,7 +57,6 @@ export default {
       }
     },
     toBoard() {
-      console.log('Mau lihat board')
       this.$router.push(`board/1`).catch(() => {})
     },
   },

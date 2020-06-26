@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     bombs() {
-      if (this.$store.state.rooms[this.$route.params.id - 1].bombs) {
+      if (this.$store.state.rooms[this.$route.params.id - 1].bombs.length > 0) {
         return this.$store.state.rooms[this.$route.params.id - 1].bombs
       }
     },
@@ -39,37 +39,40 @@ export default {
       socket.emit('clicked', params)
       console.log(this.bombs)
       //define coordinate
-      let xBefore = params.split(",")
-      // console.log(xBefore)
-      let xAfter = params.split(",").join()
-      let coordinate = []
-      coordinate.push(xAfter)
+      if(this.bombs) {
 
-      //check bomb
-      let flag = true
-      for(let i=0; i<this.bombs.length; i++){
-        if(this.bombs[i].koor == xAfter){
-          this.bombs[i].status= true
-          let obj = { 
-            bombs: this.bombs, 
-            roomId: this.$route.params.id
+        let xBefore = params.split(",")
+        // console.log(xBefore)
+        let xAfter = params.split(",").join()
+        let coordinate = []
+        coordinate.push(xAfter)
+
+        //check bomb
+        let flag = true
+        for(let i=0; i<this.bombs.length; i++){
+          if(this.bombs[i].koor == xAfter){
+            this.bombs[i].status= true
+            let obj = { 
+              bombs: this.bombs, 
+              roomId: this.$route.params.id
+            }
+            this.$store.dispatch('playerTurn', obj)
+            
+            flag = false
+            console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
+            // this.trueOrFalse[0] = '2'
+            this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
+            this.failSound()          
           }
-          this.$store.dispatch('playerTurn', obj)
-          
-          flag = false
-          console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
-          // this.trueOrFalse[0] = '2'
-          this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
-          this.failSound()          
         }
-      }
-      if(flag){
-        console.log(`No Bomb, Lets Go, Coordinate ${xAfter} is Safe`)
-        this.trueOrFalse.splice(xBefore[1]-1, 1, '1')
-        this.$store.commit('SET_SCORE')
-        this.successSound()
-        // this.trueOrFalse[xBefore[1]-1] = 1
-        // console.log(this.trueOrFalse[xBefore[1]])
+        if(flag){
+          console.log(`No Bomb, Lets Go, Coordinate ${xAfter} is Safe`)
+          this.trueOrFalse.splice(xBefore[1]-1, 1, '1')
+          this.$store.commit('SET_SCORE')
+          this.successSound()
+          // this.trueOrFalse[xBefore[1]-1] = 1
+          // console.log(this.trueOrFalse[xBefore[1]])
+        }
       }
     },
 
@@ -93,16 +96,15 @@ export default {
   },
   created() {
     console.log(this.data - 1, this.idx)
+    if(this.bombs) {
       socket.on("clicked", (params) => {
         console.log(params)
         if (params[0] - 1 == this.idx) {
           let xBefore = params.split(",")
-          // console.log(xBefore)
           let xAfter = params.split(",").join()
           let coordinate = []
           coordinate.push(xAfter)
 
-          //check bomb
           let flag = true
             for(let i=0; i<this.bombs.length; i++){
               if(this.bombs[i].koor == xAfter){
@@ -121,6 +123,7 @@ export default {
             }
           }
       })
+    }
   },
 };
 </script>

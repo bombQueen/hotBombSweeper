@@ -18,10 +18,12 @@ export default new Vuex.Store({
     SET_ROOMS(state, payload) {
       state.rooms = payload
     },
-    SET_SCORE(state, payload) {
+    SET_SCORE(state) {
       state.score++
-      console.log('score nambah === ', state.score)
-    }
+    },
+    RESET_SCORE(state) {
+      state.score == 0
+    },
   },
   actions: {
     checkLogin({ commit }) {
@@ -79,6 +81,11 @@ export default new Vuex.Store({
       } else {
         dispatch('listenRoom')
       }
+    },
+    deleteRoom({ dispatch }, roomName) {
+      console.log('DELETE', roomName)
+      socket.emit('deleteRoom', roomName)
+      dispatch('refreshRoom')
     },
     playerTurn( { dispatch }, payload){
       socket.emit('playerTurn', payload)
