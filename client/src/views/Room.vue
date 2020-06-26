@@ -8,13 +8,17 @@
         <ul>
           <li v-for="(player, i) in players" :key="i">{{ player }}</li>
         </ul>
-
-        <div>
-          <b-button id="show-btn"  @click="showModal">Open Modal</b-button>
-
-          <b-modal ref="my-modal" hide-header hide-footer>
-            <lottie-player src="https://assets6.lottiefiles.com/private_files/lf30_vKCBXa.json"  background="transparent"  speed="1"  style="width: 300px; height: 300px;"  loop controls autoplay></lottie-player>
-
+        <div v-if="modalShow">
+          <b-modal v-model="modalShow" hide-header hide-footer>
+            <lottie-player
+              src="https://assets6.lottiefiles.com/private_files/lf30_vKCBXa.json"
+              background="transparent"
+              speed="1"
+              style="width: 300px; height: 300px;"
+              loop
+              controls
+              autoplay
+            ></lottie-player>
           </b-modal>
         </div>
         <hr />
@@ -35,7 +39,16 @@ export default {
   data() {
     return {
       message: "",
-      row: 10
+      row: 10,
+      modalShow: false,
+    };
+  },
+  watch: {
+    lastName: function(val) {
+      this.fullName = this.firstName + " " + val;
+    },
+    row: function(val) {
+      console.log(val, '<<<< watch');
     }
   },
   computed: {
