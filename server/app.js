@@ -38,7 +38,6 @@ io.on('connection', (socket) => {
   
   socket.on("newRoom", function (room) {
     const bombs = randomBomb(10)
-    console.log('New BOMBS', bombs)
     room.bombs = bombs
     rooms.push(room)
     console.log('ALLROOM >>>', rooms)
@@ -52,8 +51,18 @@ io.on('connection', (socket) => {
     io.emit("rooms", rooms)
   })
 
+  socket.on("winner", ()=> {
+    io.emit("winner")
+    io.emit("rooms", rooms)
+  })
+
+  socket.on('deleteRoom', (roomName) => {
+    for( var i = 0; i < rooms.length; i++){ if ( rooms[i].name == roomName) { rooms.splice(i, 1); }}
+    io.emit("rooms", rooms)
+    console.log('DELETEROOM >>>', rooms)
+  })
+
   socket.on("playerTurn", function(payload) {
-    console.log('playerturn>>', payload)
     if(payload.roomId){
       rooms[payload.roomId - 1].bombs = payload.bombs
     }
