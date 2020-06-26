@@ -58,7 +58,7 @@ export default {
     },
     toBoard() {
       console.log('Mau lihat board')
-      this.$router.push(`board`).catch(() => {})
+      this.$router.push(`board/1`).catch(() => {})
     },
   },
   mounted() {
