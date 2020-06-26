@@ -66,6 +66,7 @@ export default {
       if(flag){
         console.log(`No Bomb, Lets Go, Coordinate ${xAfter} is Safe`)
         this.trueOrFalse.splice(xBefore[1]-1, 1, '1')
+        this.$store.commit('SET_SCORE')
         this.successSound()
         // this.trueOrFalse[xBefore[1]-1] = 1
         // console.log(this.trueOrFalse[xBefore[1]])

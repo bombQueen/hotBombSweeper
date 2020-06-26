@@ -60,6 +60,9 @@ export default {
         return this.$store.state.rooms[this.$route.params.id - 1].bombs;
       }
     },
+    score() {
+      return this.$store.state.score
+    },
     players() {
       if (this.$store.state.rooms[this.$route.params.id - 1].players) {
         return this.$store.state.rooms[this.$route.params.id - 1].players;
