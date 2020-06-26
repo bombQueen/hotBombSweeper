@@ -16,8 +16,11 @@
 </template>
 
 <script>
+import io from 'socket.io-client';
+const socket = io('http://localhost:3000'); // https://hotbomb.herokuapp.comhttp://localhost:3000
+
 export default {
-  props: [ 'data' ],
+  props: [ 'data', 'idx' ],
   data() {
     return{
       trueOrFalse: ['0','0','0','0','0','0','0','0','0','0'],
@@ -33,6 +36,7 @@ export default {
   },
   methods: {
     getId(params){
+      socket.emit('clicked', params)
       console.log(this.bombs)
       //define coordinate
       let xBefore = params.split(",")
@@ -56,7 +60,7 @@ export default {
           console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
           // this.trueOrFalse[0] = '2'
           this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
-          this.failSound()
+          this.failSound()          
         }
       }
       if(flag){
@@ -85,7 +89,38 @@ export default {
           audio2.play();
         }, 1000);
     }
-  }
+  },
+  created() {
+    console.log(this.data - 1, this.idx)
+      socket.on("clicked", (params) => {
+        console.log(params)
+        if (params[0] - 1 == this.idx) {
+          let xBefore = params.split(",")
+          // console.log(xBefore)
+          let xAfter = params.split(",").join()
+          let coordinate = []
+          coordinate.push(xAfter)
+
+          //check bomb
+          let flag = true
+            for(let i=0; i<this.bombs.length; i++){
+              if(this.bombs[i].koor == xAfter){
+                this.bombs[i].status= true
+                let obj = { 
+                  bombs: this.bombs, 
+                  roomId: this.$route.params.id
+                }
+                this.$store.dispatch('playerTurn', obj)
+                flag = false
+                console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
+                console.log(this.trueOrFalse)
+                this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
+                this.failSound()
+              }
+            }
+          }
+      })
+  },
 };
 </script>
 

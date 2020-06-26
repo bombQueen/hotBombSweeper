@@ -59,6 +59,11 @@ io.on('connection', (socket) => {
     }
     io.emit("rooms", rooms)
   })
+
+  socket.on("clicked", function(coordinate) {
+    console.log('clicked')
+    io.emit("clicked", coordinate)
+  })
 });
 
 const port = process.env.PORT || 3000
