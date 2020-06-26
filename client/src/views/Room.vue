@@ -3,7 +3,6 @@
     <div class="col-6 card">
       <div class="card-body">
         <h1 class="card-title">Play || {{roomName}}</h1>
-        <h5 class="card-body">Bombs || {{bombs}}</h5>
         <p class="lead text-muted ml-1">Click the mine when it's your turn</p>
         <ul>
           <li v-for="(player, i) in players" :key="i">{{ player }}</li>
@@ -47,8 +46,11 @@ export default {
     lastName: function(val) {
       this.fullName = this.firstName + " " + val;
     },
-    row: function(val) {
-      console.log(val, '<<<< watch');
+    score(val) {
+      let temp = this
+      if (val >= 5) {
+        temp.modalShow = true
+      }
     }
   },
   computed: {
