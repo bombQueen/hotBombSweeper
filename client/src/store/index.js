@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     isLoggedIn: null,
     rooms: [],
+    score: 0
   },
   mutations: {
     SET_ISLOGGEDIN(state, payload) {
@@ -17,6 +18,10 @@ export default new Vuex.Store({
     SET_ROOMS(state, payload) {
       state.rooms = payload
     },
+    SET_SCORE(state, payload) {
+      state.score++
+      console.log('score nambah === ', state.score)
+    }
   },
   actions: {
     checkLogin({ commit }) {
