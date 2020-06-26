@@ -17,7 +17,7 @@
 
 <script>
 import io from 'socket.io-client';
-const socket = io('https://hotbomb.herokuapp.com'); // https://hotbomb.herokuapp.comhttp://localhost:3000
+const socket = io('http://localhost:3000'); // https://hotbomb.herokuapp.comhttp://localhost:3000
 
 export default {
   props: [ 'data', 'idx' ],
@@ -60,7 +60,7 @@ export default {
           console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
           // this.trueOrFalse[0] = '2'
           this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
-          // this.failSound()          
+          this.failSound()          
         }
       }
       if(flag){
@@ -115,7 +115,7 @@ export default {
                 console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
                 console.log(this.trueOrFalse)
                 this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
-                // this.failSound()
+                this.failSound()
               }
             }
           }
