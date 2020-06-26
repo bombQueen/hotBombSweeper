@@ -34,8 +34,9 @@ export default {
   },
   data() {
     return {
-      message: ""
-    };
+      message: "",
+      row: 10
+    }
   },
   computed: {
     roomName() {

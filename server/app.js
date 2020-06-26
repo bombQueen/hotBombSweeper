@@ -17,7 +17,8 @@ const rooms = [
       { name: 'Admin', isPlaying: true, isWinner: false, isMaster: true }
     ],
     bombs: randomBomb(10),
-    isFull: false
+    isFull: false,
+    turn: 0
   }
 ]
 
@@ -49,6 +50,19 @@ io.on('connection', (socket) => {
     rooms[room.id - 1] = room
     io.to((room.name)).emit("click", room.id)
     io.emit("rooms", rooms)
+  })
+
+  socket.on("playerTurn", function(payload) {
+    console.log('playerturn>>', payload)
+    if(payload.roomId){
+      rooms[payload.roomId - 1].bombs = payload.bombs
+    }
+    io.emit("rooms", rooms)
+  })
+
+  socket.on("clicked", function(coordinate) {
+    console.log('clicked')
+    io.emit("clicked", coordinate)
   })
 });
 
