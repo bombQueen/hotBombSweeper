@@ -44,12 +44,19 @@ export default {
       //check bomb
       let flag = true
       for(let i=0; i<this.bombs.length; i++){
-        if(this.bombs[i] == xAfter){
+        if(this.bombs[i].koor == xAfter){
+          this.bombs[i].status= true
+          let obj = { 
+            bombs: this.bombs, 
+            roomId: this.$route.params.id
+          }
+          this.$store.dispatch('playerTurn', obj)
+          
           flag = false
           console.log(`BOMB!!!!!!!!!!!!!!!!!! Coordinate ${xAfter} is Boom Spot`)
           // this.trueOrFalse[0] = '2'
-        this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
-        this.failSound()
+          this.trueOrFalse.splice(xBefore[1]-1, 1, '2')
+          this.failSound()
         }
       }
       if(flag){

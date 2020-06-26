@@ -46,7 +46,8 @@ export default new Vuex.Store({
         name: data,
         players: [],
         bombs: [],
-        isFull: false
+        isFull: false,
+
       }
       localStorage.setItem('roomId', room.id)
       room.players.push(gameMaster)
@@ -74,6 +75,11 @@ export default new Vuex.Store({
         dispatch('listenRoom')
       }
     },
+    playerTurn( { dispatch }, payload){
+      console.log('dari STROE >>', payload)
+      socket.emit('playerTurn', payload)
+      dispatch('refreshRoom')
+    }
   },
   modules: {
   }
