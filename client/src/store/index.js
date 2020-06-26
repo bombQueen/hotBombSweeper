@@ -76,7 +76,6 @@ export default new Vuex.Store({
       }
     },
     playerTurn( { dispatch }, payload){
-      console.log('dari STROE >>', payload)
       socket.emit('playerTurn', payload)
       dispatch('refreshRoom')
     }

@@ -1,16 +1,7 @@
-rooms: [
-  room: {
-    max 4, min 2
-    players: [
-      {name: red, isPlaying: bool, isWinner: bool},
-      {name: blue, isPlaying: bool, isWinner: bool},
-    ]
-  }
-]
-
-App.vue -> input name -> select room
-Kasih waktu per turn (e.g. 10 secs)
-Function random di server -> client created -> get('/random/:roomId')
+Ubah Turn di room -> turn === player[index] -> boleh main
+Kena bom -> Seluruh client hit bomb
+Last survival -> Change winner status -> Bakc to lobby
+Delete room
 
 team leader (interim) -> Yohan
 layout html -> Sony

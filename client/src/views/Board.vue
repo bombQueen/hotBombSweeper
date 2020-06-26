@@ -1,15 +1,16 @@
 <template>
   <div>  
         <br><h1 class="text-center">BombSweeper</h1><br><br>
-        <MainGrid v-for="(data,idx) in row" :key="idx" :data="data">
+        <MainGrid v-for="(data, idx) in row" :key="idx" :data="data" :idx="idx">
         </MainGrid>
   </div>
 </template>
 
 <script>
+
 import MainGrid from '../components/MainGrid';
 export default {
-  name: 'App',
+  name: 'Board',
   components: {
     MainGrid
   },
@@ -21,6 +22,9 @@ export default {
       // jumlahKebawah: []
     }
   },
+  created() {
+    
+  }
 };
 </script>
 <style>
