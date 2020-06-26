@@ -46,12 +46,11 @@ export default {
   },
   watch: {
     score(val) {
-      let temp = this
       if (val >= 10) {
-        temp.modalShow = true
-        temp.$store.commit('RESET_SCORE')
-        temp.$store.dispatch('deleteRoom', localStorage.roomName)
-        temp.$router.push(`lobby`).catch(() => {})
+        this.modalShow = true
+        this.$store.commit('RESET_SCORE')
+        this.$store.dispatch('deleteRoom', localStorage.roomName)
+        this.$router.push(`/lobby`).catch(() => {})
         socket.emit('winner')
       }
     }

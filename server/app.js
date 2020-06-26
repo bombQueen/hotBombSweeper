@@ -57,7 +57,11 @@ io.on('connection', (socket) => {
   })
 
   socket.on('deleteRoom', (roomName) => {
-    for( var i = 0; i < rooms.length; i++){ if ( rooms[i].name == roomName) { rooms.splice(i, 1); }}
+    for( var i = 0; i < rooms.length; i++){ 
+      if ( rooms[i].name == roomName) {
+        console.log(rooms[i], 'Will be deleted')
+        rooms.splice(i, 1); 
+    }}
     io.emit("rooms", rooms)
     console.log('DELETEROOM >>>', rooms)
   })

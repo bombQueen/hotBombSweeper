@@ -22,7 +22,7 @@ export default new Vuex.Store({
       state.score++
     },
     RESET_SCORE(state) {
-      state.score == 0
+      state.score = 0
     },
   },
   actions: {
