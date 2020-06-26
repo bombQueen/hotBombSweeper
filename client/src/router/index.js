@@ -29,7 +29,7 @@ Vue.use(VueRouter)
     component: Room 
   },
   {
-    path: '/board',
+    path: '/board/:id',
     name: 'Board',
     meta: { requiresAuth: true },
     component: Board 

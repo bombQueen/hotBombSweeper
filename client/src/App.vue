@@ -1,6 +1,8 @@
 <template>
   <div id="app" class="container">
-    <b-button variant="danger" @click="logout">Logout</b-button>
+    <div class="d-flex justify-content-end my-3">
+      <b-button variant="danger" @click="logout">Logout</b-button>
+    </div>
     <router-view/>
   </div>
 </template>

@@ -17,16 +17,23 @@
 
 <script>
 export default {
-  props: ['data'],
+  props: [ 'data' ],
   data() {
     return{
-      bombs: ['1,3', '2,3', '10,10'],
-      trueOrFalse: ['0','0','0','0','0','0','0','0','0','0']
+      trueOrFalse: ['0','0','0','0','0','0','0','0','0','0'],
+      row: 10
     }
   },
-
+  computed: {
+    bombs() {
+      if (this.$store.state.rooms[this.$route.params.id - 1].bombs) {
+        return this.$store.state.rooms[this.$route.params.id - 1].bombs
+      }
+    },
+  },
   methods: {
     getId(params){
+      console.log(this.bombs)
       //define coordinate
       let xBefore = params.split(",")
       // console.log(xBefore)
